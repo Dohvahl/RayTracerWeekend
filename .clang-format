@@ -64,7 +64,7 @@ IncludeCategories:
   Regex: .*
 IncludeIsMainRegex: (Test)?$
 IndentCaseLabels: false
-IndentWidth: 2
+IndentWidth: 4
 IndentWrappedFunctionNames: true
 JavaScriptQuotes: Leave
 JavaScriptWrapImports: true
@@ -80,7 +80,7 @@ ObjCSpaceBeforeProtocolList: false
 PointerAlignment: Right
 ReflowComments: true
 SortIncludes: true
-SortUsingDeclarations: false
+SortUsingDeclarations: true
 SpaceAfterCStyleCast: false
 SpaceAfterTemplateKeyword: false
 SpaceBeforeAssignmentOperators: true

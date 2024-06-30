@@ -1,4 +1,5 @@
-#include <RTWeekend/rtweekend.hpp>
+#include <RTWeekend/ray.hpp>
+#include <RTWeekend/vec3.hpp>
 
 const point3 &ray::origin() const { return orig; }
 

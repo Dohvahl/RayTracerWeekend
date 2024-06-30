@@ -1,4 +1,4 @@
-#include <RTWeekend/rtweekend.hpp>
+#include <RTWeekend/vec3.hpp>
 
 double vec3::x() const { return e[0]; }
 double vec3::y() const { return e[1]; }

@@ -1,21 +1,27 @@
+#include <RTWeekend/color.hpp>
+#include <RTWeekend/hittable/hittable.hpp>
+#include <RTWeekend/ray.hpp>
 #include <RTWeekend/rtweekend.hpp>
+#include <RTWeekend/vec3.hpp>
 
 #include <RTWeekend/hittable/hittable_list.hpp>
 #include <RTWeekend/hittable/sphere.hpp>
-#include <utility>
+#include <algorithm>
+#include <iostream>
+#include <ostream>
 
-color ray_color(const ray &r, const hittable &world)
+color ray_color(const ray &ray_to_test, const hittable &world)
 {
   hit_record rec;
-  if (world.hit(r, 0, infinity, rec)) { return 0.5 * (rec.normal + color(1, 1, 1)); }
+  if (world.hit(ray_to_test, 0, infinity, rec)) { return 0.5 * (rec.normal + color(1, 1, 1)); }
 
   // lerp b/w white and blue, based on Y coordinate
-  vec3 unit_direction = unit_vector(r.direction());
+  vec3 const unit_direction = unit_vector(ray_to_test.direction());
   auto a = 0.5 * (unit_direction.y() + 1.0);
   return (1.0 - a) * color(1.0, 1.0, 1.0) + a * color(0.5, 0.7, 1.0);
 }
 
-int main(int, char **)
+int main([[maybe_unused]] int argc, [[maybe_unused]] char **argv)
 {
   // Image
 
@@ -29,8 +35,8 @@ int main(int, char **)
 
   hittable_list world;
 
-  world.add(make_shared<sphere>(point3{ 0, 0, -1 }, 0.5));
   world.add(make_shared<sphere>(point3{ 0, -100.5, -1 }, 100));
+  world.add(make_shared<sphere>(point3{ 0, 0, -1 }, 0.5));
 
   // Camera
 
@@ -60,12 +66,12 @@ int main(int, char **)
     for (int j = 0; j < image_width; j++) {
       auto pixel_center = pixel00_loc + (i * pixel_delta_v) + (j * pixel_delta_u);
       auto ray_direction = pixel_center - camera_center;
-      ray r(camera_center, ray_direction);
+      ray const ray_to_test(camera_center, ray_direction);
 
-      auto pixel_color = ray_color(r, world);
+      auto pixel_color = ray_color(ray_to_test, world);
       write_color(std::cout, pixel_color);
     }
   }
 
-  std::clog << std::endl << "Done." << std::flush << "\n";
+  std::clog << "\r\nDone." << std::flush << "\n";
 }
