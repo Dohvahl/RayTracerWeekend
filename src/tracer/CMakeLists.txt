@@ -10,6 +10,7 @@ add_library(RTyWeekend
 	color.cpp
 	hittable_list.cpp
 	hittable.cpp
+	interval.cpp
 	ray.cpp
 	sphere.cpp
 	vec3.cpp

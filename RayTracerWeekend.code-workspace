@@ -59,7 +59,19 @@
 			"new": "cpp",
 			"utility": "cpp",
 			"xtr1common": "cpp",
-			"vector": "cpp"
+			"vector": "cpp",
+			"array": "cpp",
+			"bitset": "cpp",
+			"deque": "cpp",
+			"list": "cpp",
+			"queue": "cpp",
+			"random": "cpp",
+			"ranges": "cpp",
+			"regex": "cpp",
+			"span": "cpp",
+			"stack": "cpp",
+			"xhash": "cpp",
+			"xtree": "cpp"
 		}
 	}
 }

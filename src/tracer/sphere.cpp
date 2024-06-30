@@ -1,10 +1,11 @@
 #include <RTWeekend/hittable/hittable.hpp>
 #include <RTWeekend/hittable/sphere.hpp>
+#include <RTWeekend/interval.hpp>
 #include <RTWeekend/ray.hpp>
 #include <RTWeekend/vec3.hpp>
 #include <cmath>
 
-bool sphere::hit(const ray &r, double ray_tmin, double ray_tmax, hit_record &rec) const
+bool sphere::hit(const ray &r, const interval &ray_t, hit_record &rec) const
 {
     vec3 const oc = center - r.origin();
     auto a = r.direction().length_squared();
@@ -18,9 +19,9 @@ bool sphere::hit(const ray &r, double ray_tmin, double ray_tmax, hit_record &rec
 
     // find nearest root that lies in the acceptable range
     auto root = (h - sqrtd) / a;
-    if (root <= ray_tmin || ray_tmax <= root) {
+    if (!ray_t.surrounds(root)) {
         root = (h + sqrtd) / a;
-        if (root <= ray_tmin || ray_tmax <= root) { return false; }
+        if (!ray_t.surrounds(root)) { return false; }
     }
 
     rec.t = root;
