@@ -58,6 +58,7 @@ if(NOT PROJECT_IS_TOP_LEVEL)
 endif()
 
 # Adding the tests:
+
 # include(CTest)
 
 # if(BUILD_TESTING)
@@ -110,24 +111,6 @@ set(CPACK_PACKAGE_FILE_NAME
 )
 
 include(CPack)
-
-
-
-
-# add_executable(RTWeekend 
-# 	include/rtweekend.hpp
-# 	main.cpp
-# 	color.cpp
-# 	hittable.cpp
-# 	hittable_list.cpp
-# 	ray.cpp
-# 	sphere.cpp
-# 	vec3.cpp)
-
-# target_include_directories(RTWeekend PUBLIC 
-# 	$<BUILD_INTERFACE:${RTWeekend_SOURCE_DIR}/include>
-# 	$<INSTALL_INTERFACE:include>	
-# )
 
 # set(CPACK_PROJECT_NAME ${PROJECT_NAME})
 # set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})

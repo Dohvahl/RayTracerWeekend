@@ -13,6 +13,7 @@ target_link_system_libraries(
           CLI11::CLI11
           fmt::fmt
         #   spdlog::spdlog
+			benchmark::benchmark
           lefticus::tools)
 
 # target_include_directories(intro PRIVATE "${CMAKE_BINARY_DIR}/configured_files/include")

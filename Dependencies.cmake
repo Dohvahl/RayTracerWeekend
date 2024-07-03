@@ -36,4 +36,12 @@ function(RTWeekend_setup_dependencies)
     cpmaddpackage("gh:lefticus/tools#update_build_system")
   endif()
 
+  if (NOT TARGET gtest)
+	cpmaddpackage("gh:google/googletest@1.14.0")
+  endif()
+
+  if(NOT TARGET benchmark::benchmark)
+    cpmaddpackage("gh:google/benchmark@1.8.4")
+  endif()
+
 endfunction()
