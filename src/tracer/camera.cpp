@@ -78,7 +78,10 @@ vec3 camera::sample_square()
 color camera::ray_color(const ray &ray_to_test, const hittable &world)
 {
     hit_record rec;
-    if (world.hit(ray_to_test, { 0, infinity }, rec)) { return 0.5 * (rec.normal + color(1, 1, 1)); }
+    if (world.hit(ray_to_test, { 0, infinity }, rec)) {
+        vec3 direction = random_on_hemisphere(rec.normal);
+        return 0.5 * ray_color({ rec.p, direction }, world);
+    }
 
     // lerp b/w white and blue, based on Y coordinate
     vec3 const unit_direction = unit_vector(ray_to_test.direction());
