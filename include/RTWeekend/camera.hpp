@@ -14,6 +14,7 @@ class camera
     int image_width = 100;// Rendered image width in pixel count
     int samples_per_pixel = 10;// Count of random samples for each pixel
     int max_depth = 10;// Maximum number of ray bounces into scene
+    double reflectance_factor = 0.5;
 
     void render(const hittable &world);
 

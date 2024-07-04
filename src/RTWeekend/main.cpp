@@ -35,6 +35,7 @@ int main([[maybe_unused]] int argc, [[maybe_unused]] char **argv)
     cam.image_width = 400;
     cam.samples_per_pixel = 100;
     cam.max_depth = 50;
+    cam.reflectance_factor = 0.5;
 
     timer([&]() { cam.render(world); });
 }
