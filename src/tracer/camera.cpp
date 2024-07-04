@@ -21,7 +21,7 @@ void camera::render(const hittable &world)
             color pixel_color{ 0, 0, 0 };
             for (int sample = 0; sample < samples_per_pixel; sample++) {
                 const ray ray_to_test = get_ray(i, j);
-                pixel_color += ray_color(ray_to_test, world);
+                pixel_color += ray_color(ray_to_test, max_depth, world);
             }
             write_color(std::cout, pixel_color * pixel_samples_scale);
         }
@@ -75,12 +75,15 @@ vec3 camera::sample_square()
     return { random_double() - 0.5, random_double() - 0.5, 0 };
 }
 
-color camera::ray_color(const ray &ray_to_test, const hittable &world)
+color camera::ray_color(const ray &ray_to_test, int depth, const hittable &world) const
 {
+    // If we've exceeded the ray bounce limit, no more light is gathered.
+    if (depth <= 0) return { 0, 0, 0 };
+
     hit_record rec;
     if (world.hit(ray_to_test, { 0, infinity }, rec)) {
         vec3 direction = random_on_hemisphere(rec.normal);
-        return 0.5 * ray_color({ rec.p, direction }, world);
+        return 0.5 * ray_color({ rec.p, direction }, depth - 1, world);
     }
 
     // lerp b/w white and blue, based on Y coordinate
